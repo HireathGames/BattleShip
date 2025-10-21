@@ -118,8 +118,8 @@ def run_ship_placement():
 
         # Continues verifying as we receive prompts
         success = place_ship(grid, coord, direction, ships[ship])
-        if success:
-            del ships[ship]
+        if success: # STORE COORDINATE INFO ON EACH SHIP IN CLASS SOMEWHERE 
+            del ships[ship] 
             print(f"{ship} placed.")
             print_grid(grid)
         else:
@@ -145,4 +145,5 @@ def print_grid(grid):
 # Final output after all ships chosen, all choices made       
 player_grid = run_ship_placement()
 print("Final player grid:")
+
 print_grid(player_grid)
