@@ -39,5 +39,5 @@ def select_target(cord, grid):
     row = alphabet.index(cord[0 : 1])
     colum = int(cord[1 : len(cord)]) - 1
     updated_grid = grid
-    print(updated_grid[row][colum].chosen_target())
-    return updated_grid
+    return_message = updated_grid[row][colum].chosen_target()
+    return (updated_grid, return_message)

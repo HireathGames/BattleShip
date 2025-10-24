@@ -142,8 +142,13 @@ def print_grid(grid):
     for ind in range(len(ship_grid)):
         print (letters[ind] + " " + str(ship_grid[ind]))
 
-# Final output after all ships chosen, all choices made       
+# Final output after all ships chosen, all choices made 
+# Orion: made a little thing just for debug.       
 player_grid = run_ship_placement()
-print("Final player grid:")
-
-print_grid(player_grid)
+print("Game Start!")
+while True:
+    print_grid(player_grid)
+    target = input("Please select a target: ")
+    result = Main.select_target(target, player_grid)
+    print(result[1])
+    player_grid = result[0]
