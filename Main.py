@@ -41,12 +41,3 @@ def select_target(cord, grid):
     updated_grid = grid
     print(updated_grid[row][colum].chosen_target())
     return updated_grid
-    
-for row in player_grid:
-    print(row)
-while True:
-    choice = input("Please enter a cordinate: ")
-    player_grid = select_target(choice, player_grid)
-    player_grid = destruction_check(player_grid)
-    for row in player_grid:
-        print(row)  

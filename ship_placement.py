@@ -1,3 +1,6 @@
+from Classes import Point
+import Main
+
 # establishes ships and corresponding length
 def get_available_ships():
     return {
@@ -8,9 +11,7 @@ def get_available_ships():
         "Carrier": 5
     }
 
-# initial empty grid (TO BE CHANGED FOR OFFICIAL INTERFACE)
-def create_empty_grid():
-    return [["≈" for _ in range(11)] for _ in range(11)]
+player_grid = Main.intialize_grid()
 
 # defines how our coordinates function
 def coord_to_index(coord):
@@ -46,36 +47,37 @@ def place_ship(grid, coord, direction, length):
         return False
 
     # Check for overlap
-    # Consider changing variables from letters??
-    for i in range(length): # i = each section of the ship through it's length
-        r, c = row, col
+    # Orion: I changed it from letters to actual names!
+    for step in range(length): # step = each section of the ship through it's length
+        vert, hori = row, col
         if direction == "up":
-            r -= i
+            vert -= step
         elif direction == "down":
-            r += i
+            vert += step
         elif direction == "left":
-            c -= i
+            hori -= step
         elif direction == "right":
-            c += i
+            hori += step
 
-        if grid[r][c] != "≈": # Will replace ≈ with whatever 
+        temp = grid[vert][hori].get_ID()
+        if grid[vert][hori].get_ID() != 0: # Will replace ≈ with whatever 
                                   # symbolizes open space
             print("\nOverlap detected — there's already a ship at that location.\n")
             return False 
 
     # Place the ship
-    for i in range(length):
-        r, c = row, col
+    for step in range(length):
+        vert, hori = row, col
         if direction == "up":
-            r -= i
+            vert -= step
         elif direction == "down":
-            r += i
+            vert += step
         elif direction == "left":
-            c -= i
+            hori -= step
         elif direction == "right":
-            c += i
+            hori += step
 
-        grid[r][c] = "S" # Will replace with whatever symbolizes
+        grid[vert][hori].set_ID(1)  # Will replace with whatever symbolizes
                          # occupying ship
 
     return True # If all verification passes, clear to place!
@@ -107,7 +109,7 @@ def get_placement_details(ship_name):
 def run_ship_placement():
     # Simplifies our known information
     ships = get_available_ships()
-    grid = create_empty_grid()
+    grid = Main.intialize_grid()
 
     print_grid(grid)
     # Loops updating menu and user choices
@@ -128,19 +130,17 @@ def run_ship_placement():
     return grid
 
 # Enters info into updated grid
+#Orion: I couldn't figure out how to make this part function so I kinda remade it, Sorry.
 def print_grid(grid):
     letters = "ABCDEFGHIJK"
-    
-    # Print column headers
-    print(" " + " ".join([str(i).rjust(3) for i in range(1, 12)]))
-    
-    # Print each row (consider changing i variable)
-    for i, row in enumerate(grid):
-        row_label = letters[i]
-        row_content = []
-        for cell in row:
-            row_content.append(cell.center(3))  
-        print(row_label + " " + " ".join(row_content))
+    ship_grid = []
+    for row in grid:
+        temp = []
+        for point in row:
+            temp.append(point.get_ID())
+        ship_grid.append(temp)
+    for ind in range(len(ship_grid)):
+        print (letters[ind] + " " + str(ship_grid[ind]))
 
 # Final output after all ships chosen, all choices made       
 player_grid = run_ship_placement()
