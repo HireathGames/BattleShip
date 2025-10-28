@@ -1,13 +1,6 @@
 #Imports the Point class from Classes
 from Classes import Point
 
-# imports from UI/AI logic
-import draw_boards
-import ai_logic
-import board_generator
-import copy
-
-
 #Makes a empty grid
 def intialize_grid(Height = 11, Width = 11):
     out_grid = []
