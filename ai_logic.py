@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import os
 
-torch.set_default_device("mps")
+torch.set_default_device("cpu")
 
 class BattleshipAI(nn.Module):
     def __init__(self):
@@ -40,8 +40,8 @@ def call_ai(grid):
         board.append(new_row)
 
     # load ai
-    ai_state_dict = torch.load(best_model_path, map_location="mps")
-    ai = BattleshipAI().to("mps")
+    ai_state_dict = torch.load(best_model_path, map_location="cpu")
+    ai = BattleshipAI().to("cpu")
     ai.load_state_dict(ai_state_dict)
     ai.eval()
 
