@@ -1,6 +1,8 @@
 from Classes import Point
 import Main
 
+from draw_boards import print_unplayed_board
+
 # establishes ships and corresponding length
 def get_available_ships():
     return {
@@ -21,7 +23,7 @@ def coord_to_index(coord):
     return row, col # sections off two parts of coordinate
 
 # Boolean verifies placement is valid
-def place_ship(grid, coord, direction, length):
+def place_ship(grid, coord, direction, length, ship_id):
     row, col = coord_to_index(coord)
     max_index = len(grid) - 1
 
@@ -77,7 +79,7 @@ def place_ship(grid, coord, direction, length):
         elif direction == "right":
             hori += step
 
-        grid[vert][hori].set_ID(1)  # Will replace with whatever symbolizes
+        grid[vert][hori].set_ID(ship_id)  # Will replace with whatever symbolizes
                          # occupying ship
 
     return True # If all verification passes, clear to place!
@@ -110,16 +112,24 @@ def run_ship_placement():
     # Simplifies our known information
     ships = get_available_ships()
     grid = Main.intialize_grid()
+    ship_ids = {
+        "destroyer": 9,
+        "submarine": 7,
+        "cruiser": 8,
+        "battleship": 6,
+        "carrier": 5
+    }
 
     print_grid(grid)
     # Loops updating menu and user choices
     while ships:
         print_ship_menu(ships)
         ship = get_ship_choice(ships)
+        ship_id = ship_ids[ship.lower()]
         coord, direction = get_placement_details(ship)
 
         # Continues verifying as we receive prompts
-        success = place_ship(grid, coord, direction, ships[ship])
+        success = place_ship(grid, coord, direction, ships[ship], ship_id)
         if success: # STORE COORDINATE INFO ON EACH SHIP IN CLASS SOMEWHERE 
             del ships[ship] 
             print(f"{ship} placed.")
@@ -131,6 +141,7 @@ def run_ship_placement():
 
 # Enters info into updated grid
 #Orion: I couldn't figure out how to make this part function so I kinda remade it, Sorry.
+"""
 def print_grid(grid):
     letters = "ABCDEFGHIJK"
     ship_grid = []
@@ -141,6 +152,11 @@ def print_grid(grid):
         ship_grid.append(temp)
     for ind in range(len(ship_grid)):
         print (letters[ind] + " " + str(ship_grid[ind]))
+"""
+
+def print_grid(grid):
+
+    print_unplayed_board(grid)
 
 # Final output after all ships chosen, all choices made 
 # Orion: made a little thing just for debug.       

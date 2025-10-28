@@ -9,7 +9,7 @@ destroyer: length 2, id: 9
 
 
 """
-
+from Classes import Point
 
 
 # To print player's board, just use print_my_board(old_grid,new_grid)
@@ -48,6 +48,10 @@ def print_player_board(grid,new_grid):
     ui_grid = get_ui_grid(grid,new_grid)
     my_board(ui_grid)
 
+def print_unplayed_board(grid):
+    grid = [[Point.get_ID(x) for x in row] for row in grid]
+    ui_grid = get_ui_grid(grid,grid)
+    my_board(ui_grid)
 
 
 def get_ui_grid(grid,new_grid):
