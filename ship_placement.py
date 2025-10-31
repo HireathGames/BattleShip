@@ -1,18 +1,21 @@
 from Classes import Point
+from Classes import Ship
 import Main
 
 # establishes ships and corresponding length
 def get_available_ships():
     return {
-        "Destroyer": 2,
-        "Submarine": 3,
-        "Cruiser": 3,
-        "Battleship": 4,
-        "Carrier": 5
+        [
+            Ship("Carrier", 5, 5, "c"),
+            Ship("Battleship", 4, 6, "b"),
+            Ship("Submarine", 3, 7, "s"),
+            Ship("Cruiser", 3, 8, "r"),
+            Ship("Destroyer", 2, 9, "d")
+        ]
     }
 
 player_grid = Main.intialize_grid()
-
+reserve_ships = get_available_ships()
 # defines how our coordinates function
 def coord_to_index(coord):
     letters = "ABCDEFGHIJK"
