@@ -181,7 +181,7 @@ def print_grid(grid):
 # Orion: made a little thing just for debug.       
 player_grid = run_ship_placement()
 
-clean_grid = helper_functions.fetch_ship_id_list(player_grid)
+clean_grid = helper_functions.translate_grid(player_grid)
 print(clean_grid)
 
 print("Game Start!")
