@@ -1,7 +1,7 @@
 from Classes import Point
 from Classes import Ship
 import Main
-
+import helper_functions
 from draw_boards import print_unplayed_board
 
 # establishes ships and corresponding length
@@ -98,17 +98,38 @@ def print_ship_menu(ships):
 def get_ship_choice(ships):
     while True:
         ship_name = input("Choose a ship to place by name: ").strip().lower()
-        print(ship_name)
-        print(ships.keys())
         if ship_name in ships.keys():
             return ships[ship_name]
         print("\nInvalid ship name. Try again.\n")
 
 # Prompts user to choose a coordinate
 def get_placement_details(ship):
-    coord = input(f"Enter starting coordinate for {ship.get_name()} (e.g., B5): ").strip().upper()
-    # Prompts user for direction of ship FROM coordinate
-    direction = input("Enter direction (up, down, left, right): ").strip().lower()
+    valid_coord = False
+    valid_direction = False
+
+    while not valid_coord:
+        coord = input(f"Enter starting coordinate for {ship.get_name()} (e.g., B5): ").strip().upper()
+        letter_coord = coord[0]
+        try:
+            number_coord = int(coord[1:])
+        except ValueError:
+            number_coord = 0
+
+
+
+
+
+        if (len(coord) in [2,3]) and (letter_coord in "ABCDEFGHIJK") and (1 <= number_coord <= 11):
+            valid_coord = True
+        else:
+            print("Invalid coordinate! (Must be A through K for the first coordinate and 1-11 for the second)")
+    while not valid_direction:
+        direction = input("Enter direction (up, down, left, right): ").strip().lower()
+        if direction in ["up","down","left","right"]:
+            valid_direction = True
+        else:
+            print("Invalid direction!")
+
     return coord, direction
 
 def run_ship_placement():
@@ -118,11 +139,11 @@ def run_ship_placement():
 
     print_grid(grid)
     # Loops updating menu and user choices
-    while ships:
+    while ships: 
 
         print_ship_menu(ships)
         ship = get_ship_choice(ships)
-        print(ship)
+
         ship_id = ship.get_ID()
         coord, direction = get_placement_details(ship)
 
@@ -159,6 +180,9 @@ def print_grid(grid):
 # Final output after all ships chosen, all choices made 
 # Orion: made a little thing just for debug.       
 player_grid = run_ship_placement()
+
+clean_grid = helper_functions.fetch_ship_id_list(player_grid)
+print(clean_grid)
 
 print("Game Start!")
 while True:
