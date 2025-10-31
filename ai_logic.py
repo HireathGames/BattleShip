@@ -15,7 +15,7 @@ class BattleshipAI(nn.Module):
             nn.Conv2d(8, 1, kernel_size=1)
         )
  
-    def forward(self, x):
+    def forward(self, x): 
         logits = self.conv(x)
         return logits.view(x.size(0), -1)
 

@@ -1,6 +1,6 @@
 #Imports the Point class from Classes
 from Classes import Point
-
+ 
 
 #Makes a empty grid
 def intialize_grid(Height = 11, Width = 11):
@@ -15,7 +15,7 @@ def intialize_grid(Height = 11, Width = 11):
 player_grid = intialize_grid()
 #This is the code for checking the grid to find fully destroyed ships.
 def destruction_check(grid):
-    updated_grid = grid
+    updated_grid = grid 
     points = {}
     for rows in updated_grid:
         for pos in rows:

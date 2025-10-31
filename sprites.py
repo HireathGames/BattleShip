@@ -17,7 +17,7 @@ def get_sprite(id):
     return ships[ship][orient][part][sprite_line]
 
 
-
+ 
 connectors = { 
     "c":{"v": " ||+|| ", "h": ["=","+","="]},
     "b":{"v": " |[¤]| ", "h": ["‾","¤","_"]},

@@ -18,7 +18,7 @@ def place_ship(board, ship_id, length):
         for i in range(length):
             grid[row][start_col+i] = ship_id 
             
-        return grid
+        return grid 
     
     else: #vertical
         col = random.randint(0, grid_size-1)  

@@ -8,10 +8,10 @@ def get_available_ships():
     return {
         "Destroyer": 2,
         "Submarine": 3,
-        "Cruiser": 3,
+        "Cruiser": 3, 
         "Battleship": 4,
         "Carrier": 5
-    }
+    } 
 
 player_grid = Main.intialize_grid()
 
