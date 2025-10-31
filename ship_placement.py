@@ -7,14 +7,11 @@ from draw_boards import print_unplayed_board
 # establishes ships and corresponding length
 def get_available_ships():
     return {
-
-        [
-            Ship("Carrier", 5, 5, "c"),
-            Ship("Battleship", 4, 6, "b"),
-            Ship("Submarine", 3, 7, "s"),
-            Ship("Cruiser", 3, 8, "r"),
-            Ship("Destroyer", 2, 9, "d")
-        ]
+            "carrier": Ship("Carrier", 5, 5, "c"),
+            "battleship": Ship("Battleship", 4, 6, "b"),
+            "submarine": Ship("Submarine", 3, 7, "s"),
+            "cruiser": Ship("Cruiser", 3, 8, "r"),
+            "destroyer": Ship("Destroyer", 2, 9, "d")
     }
 
 player_grid = Main.intialize_grid()
@@ -93,21 +90,23 @@ def print_ship_menu(ships):
     print("+------------+--------+")
     print("| Ship Name  | Length |")
     print("+------------+--------+")
-    for i, (name, length) in enumerate(ships.items(), start=1):
-        print(f"| {name.ljust(10)} | {str(length).center(6)} |")
+    for i, (name, ship_object) in enumerate(ships.items(), start=1):
+        print(f"| {name.ljust(10)} | {str(ship_object.get_length()).center(6)} |")
     print("+------------+--------+")
 
 # Prompts user to choose a ship
 def get_ship_choice(ships):
     while True:
-        ship_name = input("Choose a ship to place by name: ").strip().title()
-        if ship_name in ships:
-            return ship_name
+        ship_name = input("Choose a ship to place by name: ").strip().lower()
+        print(ship_name)
+        print(ships.keys())
+        if ship_name in ships.keys():
+            return ships[ship_name]
         print("\nInvalid ship name. Try again.\n")
 
 # Prompts user to choose a coordinate
-def get_placement_details(ship_name):
-    coord = input(f"Enter starting coordinate for {ship_name} (e.g., B5): ").strip().upper()
+def get_placement_details(ship):
+    coord = input(f"Enter starting coordinate for {ship.get_name()} (e.g., B5): ").strip().upper()
     # Prompts user for direction of ship FROM coordinate
     direction = input("Enter direction (up, down, left, right): ").strip().lower()
     return coord, direction
@@ -116,26 +115,21 @@ def run_ship_placement():
     # Simplifies our known information
     ships = get_available_ships()
     grid = Main.intialize_grid()
-    ship_ids = {
-        "destroyer": 9,
-        "submarine": 7,
-        "cruiser": 8,
-        "battleship": 6,
-        "carrier": 5
-    }
 
     print_grid(grid)
     # Loops updating menu and user choices
     while ships:
+
         print_ship_menu(ships)
         ship = get_ship_choice(ships)
-        ship_id = ship_ids[ship.lower()]
+        print(ship)
+        ship_id = ship.get_ID()
         coord, direction = get_placement_details(ship)
 
         # Continues verifying as we receive prompts
-        success = place_ship(grid, coord, direction, ships[ship], ship_id)
+        success = place_ship(grid, coord, direction, ship.get_length(), ship_id)
         if success: # STORE COORDINATE INFO ON EACH SHIP IN CLASS SOMEWHERE 
-            del ships[ship] 
+            del ships[ship.get_name().lower()] 
             print(f"{ship} placed.")
             print_grid(grid)
         else:
@@ -165,6 +159,7 @@ def print_grid(grid):
 # Final output after all ships chosen, all choices made 
 # Orion: made a little thing just for debug.       
 player_grid = run_ship_placement()
+
 print("Game Start!")
 while True:
     print_grid(player_grid)

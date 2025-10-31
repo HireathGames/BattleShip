@@ -11,7 +11,8 @@ def intialize_grid(Height = 11, Width = 11):
             row.append(Point())
         out_grid.append(row)
     return(out_grid)
-  
+
+
 player_grid = intialize_grid()
 #This is the code for checking the grid to find fully destroyed ships.
 def destruction_check(grid):
