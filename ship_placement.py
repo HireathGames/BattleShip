@@ -12,7 +12,7 @@ def get_available_ships():
         "Battleship": 4,
         "Carrier": 5
     } 
-
+ 
 player_grid = Main.intialize_grid()
 
 # defines how our coordinates function

@@ -10,7 +10,7 @@ class Point:
         return(output)
     def __repr__(self):
         output = str(self.state)
-        return(output)
+        return(output) 
     #Basic getters and setters
     def get_ID(self):
         return(self.ID)

@@ -6,7 +6,7 @@ def count_values(matrix, vals):
     return [sum(row.count(val) for row in matrix) for val in vals]
 
 
-def place_ship(board, ship_id, length):
+def place_ship(board, ship_id, length): 
     grid = copy.deepcopy(board)
     grid_size = len(grid)
 
