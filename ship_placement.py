@@ -19,7 +19,7 @@ player_grid = Main.intialize_grid()
 def coord_to_index(coord):
     letters = "ABCDEFGHIJK"
     row = letters.index(coord[0].upper())
-    col = int(coord[1:]) - 1
+    col = int(coord[1:]) - 1 
     return row, col # sections off two parts of coordinate
 
 # Boolean verifies placement is valid

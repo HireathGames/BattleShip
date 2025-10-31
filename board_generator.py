@@ -9,7 +9,7 @@ def count_values(matrix, vals):
 def place_ship(board, ship_id, length): 
     grid = copy.deepcopy(board)
     grid_size = len(grid)
-
+ 
 
     if random.randint(0,1)==0: #horizontal
         row = random.randint(0, grid_size-1) 

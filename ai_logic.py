@@ -3,7 +3,7 @@ import torch.nn as nn
 import os
 
 torch.set_default_device("cpu")
- 
+  
 class BattleshipAI(nn.Module):
     def __init__(self):
         super().__init__() 

@@ -7,7 +7,7 @@ submarine: length 3, id: 7
 cruiser: length 3, id: 8
 destroyer: length 2, id: 9
 
- 
+  
 """
 from Classes import Point
  

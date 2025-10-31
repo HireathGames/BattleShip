@@ -27,7 +27,7 @@ connectors = {
 }
 
 
-
+ 
 def get_connector(id,sprite_y=0):
     ship = id[0] 
     orient = id[1]
