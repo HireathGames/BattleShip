@@ -32,3 +32,26 @@ class Point:
                 
         else:
             return("INVALID TARGET")
+class Ship:
+    def __init__(self, _name, _length, _ID, _ref):
+        self.name = _name
+        self.length = _length
+        self.ID = _ID
+        self.ref = _ref
+    def get_name(self):
+        return(self.name)
+    def get_length(self):
+        return(self.length)
+    def get_ID(self):
+        return(self.ID)
+    def get_ref(self):
+        return(self.ref)
+    def set_name(self, new):
+        self.name = new
+    def set_length(self, new):
+        self.length = new
+    def set_ID(self, new):
+        self.ID = new
+    def set_ref(self, new):
+        self.ref = new
+        
