@@ -6,7 +6,7 @@ torch.set_default_device("cpu")
 
 class BattleshipAI(nn.Module):
     def __init__(self):
-        super().__init__()
+        super().__init__() 
         self.conv = nn.Sequential(
             nn.Conv2d(1, 4, kernel_size=3, padding=1),
             nn.ReLU(),
@@ -14,7 +14,7 @@ class BattleshipAI(nn.Module):
             nn.ReLU(),
             nn.Conv2d(8, 1, kernel_size=1)
         )
-
+ 
     def forward(self, x):
         logits = self.conv(x)
         return logits.view(x.size(0), -1)

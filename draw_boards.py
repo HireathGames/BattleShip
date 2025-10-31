@@ -17,7 +17,7 @@ from Classes import Point
 
 
 
-import copy
+import copy 
 import sprites
 import board_generator
 

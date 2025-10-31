@@ -1,6 +1,7 @@
 #Imports the Point class from Classes
 from Classes import Point
 
+
 #Makes a empty grid
 def intialize_grid(Height = 11, Width = 11):
     out_grid = []
