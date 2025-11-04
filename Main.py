@@ -43,11 +43,11 @@ while lose == False:
         except ValueError:
             number_coord = 0
 
-        if (len(coord) in [2,3]) and (letter_coord in "ABCDEFGHIJK") and (1 <= number_coord <= 11):
+        if (len(coord) in [2,3]) and (letter_coord in "ABCDEFGHIJK") and (1 <= number_coord <= 11) and (coord not in coords_shot):
             valid_coord = True
             coords_shot.append(coord)
         else:
-            print("Invalid coordinate! (Must be A through K for the first coordinate and 1-11 for the second)")
+            print("Invalid coordinate! (Must be A through K for the first coordinate and 1-11 for the second) (No repeats!)")
 
     #print(coord)
     
