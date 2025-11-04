@@ -57,3 +57,17 @@ def check_coordinate(grid,coord): #idk how your thinks worked so i made a more d
     grid[row][column] = Point(grid[row][column].get_ID(),status)
 
     return status,grid
+
+
+def check_ai_coordinate(grid,coords): #idk how your thinks worked so i made a more dynamic one
+    row = coords[0]
+    column = coords[1]
+    status = 0
+    if grid[row][column].get_ID() != 0:
+        status = 1
+    else:
+        status = -1
+
+    grid[row][column] = Point(grid[row][column].get_ID(),status)
+
+    return status,grid

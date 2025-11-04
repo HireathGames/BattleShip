@@ -4,6 +4,9 @@ import ship_placement
 import board_generator
 import core_functions
 import draw_boards
+import ai_logic
+import helper_functions
+
 import time
 import copy
 
@@ -60,9 +63,37 @@ while lose == False:
     elif status == 1: 
         print("\nYou hit a ship!")
 
+    
+
     time.sleep(2)
 
-    print("Ai is making its shot...")
+    draw_boards.print_player_board(original_player_grid,player_grid)
+
+
+    print("Ai is making its shot")
+
+    time.sleep(2)
+
+    ai_coords = ai_logic.call_ai(helper_functions.translate_point_to_grid(player_grid))
+    print(ai_coords)
+
+    status,player_grid = core_functions.check_ai_coordinate(player_grid,ai_coords)
+
+
+
+    draw_boards.print_player_board(original_player_grid,player_grid)
+
+    if status == -1:
+        print("\nThe AI missed!")
+    elif status == 1: 
+        print("\nThe AI hit a ship...")
+
+    time.sleep(3)
+
+
+
+
+
 
     
 
