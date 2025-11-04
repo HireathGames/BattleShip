@@ -44,15 +44,24 @@ def safe_index(grid,y,x):
 
 
 def print_player_board(grid,new_grid):
-
     ui_grid = get_ui_grid(grid,new_grid)
     my_board(ui_grid)
+
+
+
 
 def print_unplayed_board(grid):
     grid = helper_functions.translate_grid(grid)
     ui_grid = get_ui_grid(grid,grid)
     my_board(ui_grid)
 
+
+def print_ai_board(grid,new_grid):
+    grid = helper_functions.translate_grid(grid)
+    new_grid = helper_functions.translate_grid(new_grid)
+
+    ui_grid = get_hidden_ui_grid(grid,new_grid)
+    my_board(ui_grid)
 
 
 
@@ -94,6 +103,46 @@ def get_ui_grid(grid,new_grid):
     return edit_grid
             
 
+
+def get_hidden_ui_grid(grid,new_grid):
+    # check for beginnings of horiz ships
+    type_ids = "01234cbsrd" #0-4 are dummy characters as padding to index the others
+
+    edit_grid = copy.deepcopy(grid)
+
+    for y in range(len(grid)):
+        for x in range(len(grid[0])):
+            center = safe_index(grid,y,x)
+            top = safe_index(grid,y-1,x)
+            bottom = safe_index(grid,y+1,x)
+            left = safe_index(grid,y,x-1)
+            right = safe_index(grid,y,x+1)
+            if not center == 0:
+                if center == bottom == top: edit_grid[y][x]=f"{type_ids[grid[y][x]]}v1"
+                elif center == bottom: edit_grid[y][x]=f"{type_ids[grid[y][x]]}v0"
+                elif center == top: edit_grid[y][x]=f"{type_ids[grid[y][x]]}v2"
+                else:
+                    if center == left == right: edit_grid[y][x]=f"{type_ids[grid[y][x]]}h1"
+                    elif center == left: edit_grid[y][x]=f"{type_ids[grid[y][x]]}h0"
+                    elif center == right: edit_grid[y][x]=f"{type_ids[grid[y][x]]}h2"
+            else:
+                edit_grid[y][x]="   "
+
+
+            
+            if new_grid[y][x] == 1:
+                edit_grid[y][x] = "mv0"
+            elif new_grid[y][x]!=abs(new_grid[y][x]):
+                if sum(board_generator.count_values(new_grid,[abs(new_grid[y][x])]))==0:
+                    edit_grid[y][x] = "gv0"
+                else:
+                    edit_grid[y][x]="hv0"
+                    
+            if not edit_grid[y][x][0] in ["m","g","h"]:
+                edit_grid[y][x] = "   "
+
+    return edit_grid
+            
 
 
 
