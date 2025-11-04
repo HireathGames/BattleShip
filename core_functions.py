@@ -41,3 +41,19 @@ def select_target(cord, grid):
     updated_grid = grid
     return_message = updated_grid[row][colum].chosen_target()
     return (updated_grid, return_message)
+
+
+def check_coordinate(grid,coord):
+    alphabet = "ABCDEFGHIJK"
+    row = alphabet.index(coord[0])
+    column = int(coord[1 : len(coord)]) - 1
+    status = 0
+    if grid[row][column].get_ID() != 0:
+        status = 1
+
+    else:
+        status = -1
+
+    grid[row][column] = Point(grid[row][column].get_ID(),status)
+
+    return status,grid

@@ -1,9 +1,11 @@
 import random
 import copy
 from Classes import Point
+from helper_functions import sanitize_board
 
 def count_values(matrix, vals):
     return [sum(row.count(val) for row in matrix) for val in vals]
+
 
 
 def place_ship(board, ship_id, length): 
@@ -63,9 +65,9 @@ def generate_board():
 
 
 def make_point_board(grid):
-    print(grid)
     for y in range(len(grid)):
         for x in range(len(grid[0])):
+            #print(grid[y][x])
             grid[y][x] = Point(grid[y][x],0)
 
     return grid
@@ -73,33 +75,11 @@ def make_point_board(grid):
 
 
 def generate_board_point():
-    board = [[0]*11 for _ in range(11)]
+    board = generate_board()
+    print(board)
+    print(board[0][0])
 
-    ships = {5: 5, 6: 4, 7: 3, 8: 3, 9: 2}
-
-    ship_items = list(ships.items())
-    random.shuffle(ship_items)
-
-
-    ships_placed_id = []
-    ships_placed_len = []
-
-    fails = 0
-
-
-    for ship_id, length in ships.items():
-
-        valid_placement = False
-
-        ships_placed_id.append(ship_id)
-        ships_placed_len.append(length)
-
-        while not valid_placement:
-            test_board = place_ship(board, ship_id, length)
-
-            if count_values(test_board,ships_placed_id)==ships_placed_len:
-                board = test_board
-                valid_placement = True
-
-
-    return make_point_board(board)
+    board = make_point_board(board)
+    print(board)
+    print(board[0][0])
+    return sanitize_board(board)

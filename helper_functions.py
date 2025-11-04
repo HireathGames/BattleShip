@@ -17,22 +17,34 @@ def translate_point_to_grid(points_grid):
     # 0 baseline
     # 1 hit
     # -1 miss
+    # -2 sunk
 
-    normal_grid = copy.deepcopy(points_grid)
+    print(points_grid)
+
+    normal_grid = sanitize_board(copy.deepcopy(points_grid))
 
     for y in range(len(points_grid)):
         for x in range(len(points_grid[0])):
+            print(points_grid[y][x])
 
-            if Point.get_State(points_grid[y][x]) == 0: # no modification
+            if points_grid[y][x].get_State() == 0: # no modification
                 normal_grid[y][x]=Point.get_ID(points_grid[y][x])
 
-            if Point.get_State(points_grid[y][x]) in [1,-2]: # hit/sunk
+            if points_grid[y][x].get_State() in [1,-2]: # hit/sunk
                 normal_grid[y][x] = 0 - Point.get_ID(points_grid[y][x])
 
-            if Point.get_State(points_grid[y][x]) < -1: # miss
+            if points_grid[y][x].get_State() == -1: # miss
                 normal_grid[y][x] = 1
 
     
     return normal_grid
 
+
+
+def sanitize_board(board):
+    for y in range(len(board)):
+        for x in range(len(board[0])):
+            if isinstance(board[y][x], list):
+                board[y][x] = 0
+    return board
        

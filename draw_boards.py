@@ -44,6 +44,9 @@ def safe_index(grid,y,x):
 
 
 def print_player_board(grid,new_grid):
+    grid = helper_functions.translate_point_to_grid(copy.deepcopy(grid))
+    new_grid = helper_functions.translate_point_to_grid(copy.deepcopy(new_grid))
+
     ui_grid = get_ui_grid(grid,new_grid)
     my_board(ui_grid)
 
@@ -51,7 +54,8 @@ def print_player_board(grid,new_grid):
 
 
 def print_unplayed_board(grid):
-    grid = helper_functions.translate_point_to_grid(grid)
+    grid = helper_functions.translate_point_to_grid(copy.deepcopy(grid))
+
     ui_grid = get_ui_grid(grid,grid)
     my_board(ui_grid)
 
@@ -129,7 +133,7 @@ def get_hidden_ui_grid(grid,new_grid):
                 edit_grid[y][x]="   "
 
 
-            
+            print(new_grid[y][x])
             if new_grid[y][x] == 1:
                 edit_grid[y][x] = "mv0"
             elif new_grid[y][x]!=abs(new_grid[y][x]):
