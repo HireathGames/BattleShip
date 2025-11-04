@@ -1,6 +1,6 @@
 from Classes import Point
 from Classes import Ship
-import Main
+import core_functions
 import helper_functions
 from draw_boards import print_unplayed_board
 
@@ -14,7 +14,7 @@ def get_available_ships():
             "destroyer": Ship("Destroyer", 2, 9, "d")
     }
 
-player_grid = Main.intialize_grid()
+player_grid = core_functions.intialize_grid()
 reserve_ships = get_available_ships()
 # defines how our coordinates function
 def coord_to_index(coord):
@@ -117,8 +117,6 @@ def get_placement_details(ship):
 
 
 
-
-
         if (len(coord) in [2,3]) and (letter_coord in "ABCDEFGHIJK") and (1 <= number_coord <= 11):
             valid_coord = True
         else:
@@ -135,7 +133,7 @@ def get_placement_details(ship):
 def run_ship_placement():
     # Simplifies our known information
     ships = get_available_ships()
-    grid = Main.intialize_grid()
+    grid = core_functions.intialize_grid()
 
     print_grid(grid)
     # Loops updating menu and user choices
@@ -151,7 +149,7 @@ def run_ship_placement():
         success = place_ship(grid, coord, direction, ship.get_length(), ship_id)
         if success: # STORE COORDINATE INFO ON EACH SHIP IN CLASS SOMEWHERE 
             del ships[ship.get_name().lower()] 
-            print(f"{ship} placed.")
+            print(f"{ship.get_name} placed.")
             print_grid(grid)
         else:
             print("\nInvalid placement. Try again.\n")
@@ -177,17 +175,18 @@ def print_grid(grid):
 
     print_unplayed_board(grid)
 
-# Final output after all ships chosen, all choices made 
-# Orion: made a little thing just for debug.       
-player_grid = run_ship_placement()
+def do_demo():
+    # Final output after all ships chosen, all choices made 
+    # Orion: made a little thing just for debug.       
+    player_grid = run_ship_placement()
 
-clean_grid = helper_functions.translate_grid(player_grid)
-print(clean_grid)
+    clean_grid = helper_functions.translate_point_to_grid(player_grid)
+    print(clean_grid)
 
-print("Game Start!")
-while True:
-    print_grid(player_grid)
-    target = input("Please select a target: ")
-    result = Main.select_target(target, player_grid)
-    print(result[1])
-    player_grid = result[0]
+    print("Game Start!")
+    while True:
+        print_grid(player_grid)
+        target = input("Please select a target: ")
+        result = core_functions.select_target(target, player_grid)
+        print(result[1])
+        player_grid = result[0]

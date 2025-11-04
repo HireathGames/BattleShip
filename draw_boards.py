@@ -51,14 +51,14 @@ def print_player_board(grid,new_grid):
 
 
 def print_unplayed_board(grid):
-    grid = helper_functions.translate_grid(grid)
+    grid = helper_functions.translate_point_to_grid(grid)
     ui_grid = get_ui_grid(grid,grid)
     my_board(ui_grid)
 
 
 def print_ai_board(grid,new_grid):
-    grid = helper_functions.translate_grid(grid)
-    new_grid = helper_functions.translate_grid(new_grid)
+    grid = helper_functions.translate_point_to_grid(grid)
+    new_grid = helper_functions.translate_point_to_grid(new_grid)
 
     ui_grid = get_hidden_ui_grid(grid,new_grid)
     my_board(ui_grid)
