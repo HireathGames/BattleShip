@@ -4,7 +4,7 @@ import ship_placement
 import board_generator
 import core_functions
 import draw_boards
-
+import time
 import copy
 
 
@@ -46,10 +46,25 @@ while lose == False:
         else:
             print("Invalid coordinate! (Must be A through K for the first coordinate and 1-11 for the second)")
 
-    print(coord)
+    #print(coord)
     
     status,ai_grid = core_functions.check_coordinate(ai_grid,coord)
 
-    print(status)
+    #print(status)
+
 
     draw_boards.print_ai_board(original_ai_grid,ai_grid)
+
+    if status == -1:
+        print("\nYou missed...")
+    elif status == 1: 
+        print("\nYou hit a ship!")
+
+    time.sleep(2)
+
+    print("Ai is making its shot...")
+
+    
+
+
+

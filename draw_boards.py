@@ -133,7 +133,7 @@ def get_hidden_ui_grid(grid,new_grid):
                 edit_grid[y][x]="   "
 
 
-            print(new_grid[y][x])
+
             if new_grid[y][x] == 1:
                 edit_grid[y][x] = "mv0"
             elif new_grid[y][x]!=abs(new_grid[y][x]):

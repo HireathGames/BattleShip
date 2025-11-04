@@ -19,13 +19,11 @@ def translate_point_to_grid(points_grid):
     # -1 miss
     # -2 sunk
 
-    print(points_grid)
 
     normal_grid = sanitize_board(copy.deepcopy(points_grid))
 
     for y in range(len(points_grid)):
         for x in range(len(points_grid[0])):
-            print(points_grid[y][x])
 
             if points_grid[y][x].get_State() == 0: # no modification
                 normal_grid[y][x]=Point.get_ID(points_grid[y][x])

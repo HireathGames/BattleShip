@@ -43,7 +43,7 @@ def select_target(cord, grid):
     return (updated_grid, return_message)
 
 
-def check_coordinate(grid,coord):
+def check_coordinate(grid,coord): #idk how your thinks worked so i made a more dynamic one
     alphabet = "ABCDEFGHIJK"
     row = alphabet.index(coord[0])
     column = int(coord[1 : len(coord)]) - 1

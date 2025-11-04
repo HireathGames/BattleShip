@@ -76,10 +76,8 @@ def make_point_board(grid):
 
 def generate_board_point():
     board = generate_board()
-    print(board)
-    print(board[0][0])
+
 
     board = make_point_board(board)
-    print(board)
-    print(board[0][0])
+
     return sanitize_board(board)
