@@ -20,6 +20,11 @@ class Point:
         self.ID = input 
     def set_State(self, input):
         self.state = input
+    def __eq__(self, other):
+        if (self.state == other.get_state()) and (self.ID == other.get_ID()):
+            return(True)
+        else:
+            return
 
 
     #This is code for when the player selects a target, the sets it to it's proper state and returns if it hit or missed.
