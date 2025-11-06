@@ -19,7 +19,7 @@ import helper_functions
 
 import copy 
 import sprites
-import board_generator
+
 
 # vertical id = "v", horiz id = "h"
 # top/left id = 0, middle id = 1, bottom/right id = 2
@@ -99,7 +99,7 @@ def get_ui_grid(grid,new_grid):
             if new_grid[y][x] == 1:
                 edit_grid[y][x] = "mv0"
             elif new_grid[y][x]!=abs(new_grid[y][x]):
-                if sum(board_generator.count_values(new_grid,[abs(new_grid[y][x])]))==0:
+                if sum(helper_functions.count_values(new_grid,[abs(new_grid[y][x])]))==0:
                     edit_grid[y][x] = "gv0"
                 else:
                     edit_grid[y][x]="hv0"
@@ -137,7 +137,7 @@ def get_hidden_ui_grid(grid,new_grid):
             if new_grid[y][x] == 1:
                 edit_grid[y][x] = "mv0"
             elif new_grid[y][x]!=abs(new_grid[y][x]):
-                if sum(board_generator.count_values(new_grid,[abs(new_grid[y][x])]))==0:
+                if sum(helper_functions.count_values(new_grid,[abs(new_grid[y][x])]))==0:
                     edit_grid[y][x] = "gv0"
                 else:
                     edit_grid[y][x]="hv0"

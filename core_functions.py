@@ -1,4 +1,6 @@
-from Classes import Point
+from Classes import Point, Ship
+import helper_functions
+
 
 def intialize_grid(Height = 11, Width = 11):
     out_grid = []
@@ -8,6 +10,7 @@ def intialize_grid(Height = 11, Width = 11):
             row.append(Point())
         out_grid.append(row)
     return(out_grid)
+
 
 
 #This is the code for checking the grid to find fully destroyed ships.
@@ -43,25 +46,15 @@ def select_target(cord, grid):
     return (updated_grid, return_message)
 
 
-def check_coordinate(grid,coord): #idk how your thinks worked so i made a more dynamic one
+def shoot_coordinate(grid,coord): #idk how your thinks worked so i made a more dynamic one
     alphabet = "ABCDEFGHIJK"
-    row = alphabet.index(coord[0])
-    column = int(coord[1 : len(coord)]) - 1
-    status = 0
-    if grid[row][column].get_ID() != 0:
-        status = 1
-
+    if type(coord[0])==str:
+        row = alphabet.index(coord[0])
+        column = int(coord[1 : len(coord)]) - 1
     else:
-        status = -1
+        row = coord[0]
+        column = coord[1]
 
-    grid[row][column] = Point(grid[row][column].get_ID(),status)
-
-    return status,grid
-
-
-def check_ai_coordinate(grid,coords): #idk how your thinks worked so i made a more dynamic one
-    row = coords[0]
-    column = coords[1]
     status = 0
     if grid[row][column].get_ID() != 0:
         status = 1
@@ -70,4 +63,25 @@ def check_ai_coordinate(grid,coords): #idk how your thinks worked so i made a mo
 
     grid[row][column] = Point(grid[row][column].get_ID(),status)
 
-    return status,grid
+    return grid,status
+
+
+
+
+def check_for_win(grid,ship_dict):
+
+    grid = helper_functions.translate_point_to_grid(grid)
+    ship_ids = []
+
+    for key in ship_dict:
+        ship_ids.append(ship_dict[key].get_ID())
+    
+    
+    ships_remaining = sum(helper_functions.count_values(grid,ship_ids))
+
+    if ships_remaining < 1: # optimally just catches at == zero but you can never be too safe
+        return True
+    return False
+
+
+

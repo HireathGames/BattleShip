@@ -4,6 +4,9 @@ import core_functions
 import helper_functions
 from draw_boards import print_unplayed_board
 
+import copy
+import random
+
 # establishes ships and corresponding length
 def get_available_ships():
     return {
@@ -174,6 +177,46 @@ def print_grid(grid):
 def print_grid(grid):
 
     print_unplayed_board(grid)
+
+
+
+def generate_random_board(): # My random board generator I use for the AI
+    board = [[0]*11 for _ in range(11)]
+    ships = {5: 5, 6: 4, 7: 3, 8: 3, 9: 2}
+
+    ships_placed_id = []
+    ships_placed_len = []
+
+    for ship_id, length in ships.items():
+        valid_placement = False
+        ships_placed_id.append(ship_id)
+        ships_placed_len.append(length)
+
+        while not valid_placement:
+            grid = copy.deepcopy(board)
+            grid_size = len(grid)
+
+            if random.randint(0, 1) == 0:  # horizontal
+                row = random.randint(0, grid_size-1)
+                start_col = random.randint(0, grid_size-length)
+                for i in range(length):
+                    grid[row][start_col+i] = ship_id
+            else:  # vertical
+                col = random.randint(0, grid_size-1)
+                start_row = random.randint(0, grid_size-length)
+                for i in range(length):
+                    grid[start_row+i][col] = ship_id
+
+            if helper_functions.count_values(grid, ships_placed_id) == ships_placed_len:
+                board = grid
+                valid_placement = True
+
+    for y in range(len(board)):
+        for x in range(len(board[0])):
+            board[y][x] = Point(board[y][x], 0)
+
+    return board
+
 
 def do_demo():
     # Final output after all ships chosen, all choices made 

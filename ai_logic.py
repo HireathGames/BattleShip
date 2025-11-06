@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 import os
 
+import helper_functions
+
 torch.set_default_device("cpu")
   
 class BattleshipAI(nn.Module):
@@ -21,6 +23,9 @@ class BattleshipAI(nn.Module):
 
 
 def call_ai(grid):
+    
+    grid = helper_functions.translate_point_to_grid(grid)
+
     best_model_path = os.path.join(os.path.dirname(__file__), "best_ai.pth")
     if not os.path.exists(best_model_path):
         print("No best_ai.pth found. Please train the model first.")
