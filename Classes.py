@@ -6,8 +6,9 @@ class Point:
         self.ID = _ID
         self.state = _State
     def __str__(self):
-        output = str(self.ID) + ", " + str(self.state)
+        output = f"[{str(self.ID)}, {str(self.state)}]"
         return(output) 
+    
     def __repr__(self):
         output = str(self.state)
         return(output) 
