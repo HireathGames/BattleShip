@@ -112,10 +112,11 @@ def get_placement_details(ship):
 
     while not valid_coord:
         coord = input(f"Enter starting coordinate for {ship.get_name()} (e.g., B5): ").strip().upper()
-        letter_coord = coord[0]
         try:
+            letter_coord = coord[0]
             number_coord = int(coord[1:])
-        except ValueError:
+        except:
+            letter_coord = "p"
             number_coord = 0
 
 

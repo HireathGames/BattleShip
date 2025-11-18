@@ -10,8 +10,8 @@ import core_functions
 import gameloop_input
 
 
-short_break = 0
-long_break = 0
+short_break = 2
+long_break = 3.5
 
 
 
@@ -22,7 +22,7 @@ while keep_playing:
     ship_dictionary = ship_placement.get_available_ships()
 
 
-    player_grid = ship_placement.generate_random_board() # ship_placement.run_ship_placement()
+    player_grid = ship_placement.run_ship_placement()
     original_player_grid = copy.deepcopy(player_grid) 
 
 
@@ -39,7 +39,7 @@ while keep_playing:
         draw_boards.print_ai_board(original_ai_grid,ai_grid)
 
 
-        ai_grid,status = gameloop_input.get_ai_shot(ai_grid)
+        ai_grid,status = gameloop_input.get_player_shot(ai_grid)
         
         draw_boards.print_ai_board(original_ai_grid,ai_grid)
 
@@ -51,6 +51,7 @@ while keep_playing:
             if core_functions.check_for_win(ai_grid,ship_dictionary):
                 winner = 1
                 break
+        time.sleep(short_break)
 
 
         draw_boards.print_player_board(original_player_grid,player_grid)
