@@ -4,9 +4,9 @@ import os
 
 import helper_functions
 
-torch.set_default_device("cpu")
+torch.set_default_device("cpu") #general, works on windows and mac machines reasonably fast
   
-class BattleshipAI(nn.Module):
+class BattleshipAI(nn.Module): #the neural network of the AI
     def __init__(self):
         super().__init__() 
         self.conv = nn.Sequential(
@@ -22,7 +22,7 @@ class BattleshipAI(nn.Module):
         return logits.view(x.size(0), -1)
 
 
-def call_ai(grid):
+def call_ai(grid): #simply takes a play grid and outputs coordinates to shoot at
     
     grid = helper_functions.translate_point_to_grid(grid)
 
@@ -51,7 +51,7 @@ def call_ai(grid):
     ai.eval()
 
     board_size = len(board)
-    state = torch.tensor(board, dtype=torch.float32).unsqueeze(0).unsqueeze(0)  # (1,1,H,W)
+    state = torch.tensor(board, dtype=torch.float32).unsqueeze(0).unsqueeze(0)
 
     # mask played points so it doesnt get stuck in a loop
     flat_board = state.flatten()

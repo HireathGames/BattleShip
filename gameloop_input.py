@@ -3,8 +3,9 @@ import ai_logic
 
 coords_shot = []
 
+# These are meant to be suer interchangable for debug purposes, they both input and output exactly the same format.
 
-def get_player_shot(grid):
+def get_player_shot(grid): # get input.
 
     valid_coord = False
 
@@ -26,7 +27,7 @@ def get_player_shot(grid):
     return core_functions.shoot_coordinate(grid,coord)
 
 
-def get_ai_shot(grid):
+def get_ai_shot(grid): # performs the shot. 
     coord = ai_logic.call_ai(grid)
 
     return core_functions.shoot_coordinate(grid,coord)

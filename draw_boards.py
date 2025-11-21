@@ -43,7 +43,7 @@ def safe_index(grid,y,x):
     return 0
 
 
-def print_player_board(grid,new_grid):
+def print_player_board(grid,new_grid): # prints out the board its given. Give it the new grid and the original grid for sprite tracking reasons
     grid = helper_functions.translate_point_to_grid(copy.deepcopy(grid))
     new_grid = helper_functions.translate_point_to_grid(copy.deepcopy(new_grid))
 
@@ -53,14 +53,14 @@ def print_player_board(grid,new_grid):
 
 
 
-def print_unplayed_board(grid):
+def print_unplayed_board(grid): # prints out the board its given. Doesn't need any original grid (it is the original grid)
     grid = helper_functions.translate_point_to_grid(copy.deepcopy(grid))
 
     ui_grid = get_ui_grid(grid,grid)
     my_board(ui_grid)
 
 
-def print_ai_board(grid,new_grid):
+def print_ai_board(grid,new_grid): # same as player board but doesn't show you the ship locations
     grid = helper_functions.translate_point_to_grid(grid)
     new_grid = helper_functions.translate_point_to_grid(new_grid)
 
@@ -70,7 +70,7 @@ def print_ai_board(grid,new_grid):
 
 
 
-def get_ui_grid(grid,new_grid):
+def get_ui_grid(grid,new_grid): #this formats the list in a way where each coordinate has the ID of the sprite it wants
     # check for beginnings of horiz ships
     type_ids = "01234cbsrd" #0-4 are dummy characters as padding to index the others
 
@@ -108,7 +108,7 @@ def get_ui_grid(grid,new_grid):
             
 
 
-def get_hidden_ui_grid(grid,new_grid):
+def get_hidden_ui_grid(grid,new_grid): # same as get_ui_grid but doesn't show the ships, only hits/misses, for the ai's grid
     # check for beginnings of horiz ships
     type_ids = "01234cbsrd" #0-4 are dummy characters as padding to index the others
 
@@ -122,11 +122,11 @@ def get_hidden_ui_grid(grid,new_grid):
             left = safe_index(grid,y,x-1)
             right = safe_index(grid,y,x+1)
             if not center == 0:
-                if center == bottom == top: edit_grid[y][x]=f"{type_ids[grid[y][x]]}v1"
+                if center == bottom == top: edit_grid[y][x]=f"{type_ids[grid[y][x]]}v1" #vertical ships
                 elif center == bottom: edit_grid[y][x]=f"{type_ids[grid[y][x]]}v0"
                 elif center == top: edit_grid[y][x]=f"{type_ids[grid[y][x]]}v2"
                 else:
-                    if center == left == right: edit_grid[y][x]=f"{type_ids[grid[y][x]]}h1"
+                    if center == left == right: edit_grid[y][x]=f"{type_ids[grid[y][x]]}h1" #horizontal ships
                     elif center == left: edit_grid[y][x]=f"{type_ids[grid[y][x]]}h0"
                     elif center == right: edit_grid[y][x]=f"{type_ids[grid[y][x]]}h2"
             else:
@@ -150,7 +150,7 @@ def get_hidden_ui_grid(grid,new_grid):
 
 
 
-def my_board(ui_grid):
+def my_board(ui_grid): #mostly nonsense arbitrary UI code. You don't really need to know what's going on under the hood, trust the process
     """
     all pipe characters:
     ═  ║  ╔  ╗  ╚  ╝  ╠  ╣  ╦  ╩  ╬

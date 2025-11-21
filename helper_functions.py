@@ -13,6 +13,8 @@ def translate_board(grid):
 
 def translate_point_to_grid(points_grid):
 
+    # we built our functions in slightly different formats, so this is just the hacky fix to make sure they can be interchangable
+
     # states:
     # 0 baseline
     # 1 hit

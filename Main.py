@@ -44,7 +44,7 @@ while keep_playing:
         draw_boards.print_ai_board(original_ai_grid,ai_grid)
 
 
-        if status == -1:
+        if status == -1: # check hit/miss
             print("\nYou missed...")
         elif status == 1: 
             print("\nYou hit a ship!")
@@ -71,7 +71,7 @@ while keep_playing:
         draw_boards.print_player_board(original_player_grid,player_grid)
 
 
-        if ai_status == -1:
+        if ai_status == -1: # check hit/miss
             print("\nThe AI missed!")
         elif ai_status == 1: 
             print("\nThe AI hit a ship...")
@@ -88,7 +88,7 @@ while keep_playing:
 
     if winner == 1: #player win
         print("\n\nYou won!")
-    elif winner == 2:
+    elif winner == 2: #ai win
         print("\n\nThe AI won...")
 
     time.sleep(short_break)
